@@ -1,177 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Academic Webpage" />
-    <meta name="author" content="senli1073" />
-    <title id="title"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            background-color: #f9f9f9;
+        }
 
-    <!-- Icon -->
-    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        /* 背景图片样式 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -1;
+        }
 
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        .resume-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
 
-    <!-- Google fonts-->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
-        rel="stylesheet" />
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 20px;
+            position: relative;
+        }
 
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link type="text/css" href="static/css/styles.css" rel="stylesheet" />
-    <link type="text/css" href="static/css/main.css" rel="stylesheet" />
+        /* 个人照片样式 */
+        .photo {
+            position: absolute;
+            right: 30px;
+            top: 0;
+            width: 120px;
+            height: 160px;
+            border: 3px solid #3498db;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+        }
 
-    <!-- Bootstrap core JS-->
-    <script type="text/javascript" src="static/js/bootstrap.bundle.min.js"></script>
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    <!-- For Compatability -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    
-    <!-- Markdown -->
-    <script type="text/javascript" src="static/js/marked.min.js"></script>
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            padding-right: 130px;
+            /* 为照片留出空间 */
+        }
 
-    <!-- Mathematics -->
-    <script>
-        // See https://docs.mathjax.org/en/latest/index.html for more details.
-        MathJax = {
-            tex: {
-                packages: {},              // extensions to use
-                inlineMath: [              // start/end delimiter pairs for in-line math
-                    ['$', '$'],
-                    ['\\(', '\\)']
-                ],
-                displayMath: [             // start/end delimiter pairs for display math
-                    ['$$', '$$'],
-                    ['\\[', '\\]']
-                ],
-                processEscapes: false,      // use \$ to produce a literal dollar sign
-                processEnvironments: true, // process \begin{xxx}...\end{xxx} outside math mode
-                processRefs: true,         // process \ref{...} outside of math mode
-                digits: /^(?:[0-9]+(?:\{,\}[0-9]{3})*(?:\.[0-9]*)?|\.[0-9]+)/,    // pattern for recognizing numbers
-                tags: 'all',              // or 'ams' or 'all'
-                tagSide: 'right',          // side for \tag macros
-                tagIndent: '0.8em',        // amount to indent tags
-                useLabelIds: true,         // use label name rather than tag for ids
-                maxMacros: 10000,          // maximum number of macro substitutions per expression
-                maxBuffer: 5 * 1024,       // maximum size for the internal TeX string (5K)
-                // baseURL:                   // URL for use with links to tags (when there is a <base> tag in effect)
-                // (document.getElementsByTagName('base').length === 0) ? '' : String(document.location).replace(/#.*$/, ''),
-                formatError:               // function called when TeX syntax errors occur
-                    (jax, err) => jax.formatError(err)
+        .contact-info {
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-right: 130px;
+            /* 为照片留出空间 */
+        }
+
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .item {
+            margin-bottom: 15px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item-title {
+            font-size: 18px;
+        }
+
+        .item-date {
+            color: #7f8c8d;
+        }
+
+        .item-subtitle {
+            font-style: italic;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .skill-category {
+            width: 48%;
+            margin-right: 2%;
+        }
+
+        /* 响应式设计 - 小屏幕调整 */
+        @media (max-width: 600px) {
+            .skill-category {
+                width: 100%;
             }
-        };
-    </script>
-    <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <!-- Core JS-->
-    <script type="text/javascript" src="static/js/scripts.js"></script>
-    <script type="text/javascript" src="static/js/js-yaml.min.js"></script>
 
+            .resume-container {
+                padding: 15px;
+            }
+
+            .photo {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin: 0 auto 15px;
+                display: block;
+                width: 100px;
+                height: 133px;
+            }
+
+            h1,
+            .contact-info {
+                padding-right: 0;
+            }
+        }
+    </style>
 </head>
 
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="header navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-        <div class="container px-5">
-            <a id="page-top-title" class="navbar-brand fw-bold" href="#page-top"></a>
-            <!-- <a href="#page-top"><img src="static/assets/img/CUMT_LOGO.svg" style="width: 11rem;"></a> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                MENU
-                <i class="bi-list"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="#page-top">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="#publications">PUBLICATIONS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="#awards">AWARDS</a>
-                    </li>
+<body>
+    <div class="resume-container">
+        <div class="header">
+            <!-- 个人照片区域 -->
+            <div class="photo">
+                <img src="./1.png.jpg" alt="张三的个人照片">
+            </div>
+
+            <h1>叶文锋</h1>
+            <div class="contact-info">
+                <span>电话: 19849524848</span> |
+                <span>邮箱: 1421223350@qq.com</span> |
+                <span>地址: 广东省深圳市</span>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>个人简介</h2>
+            <p>
+                通信软件技术专业应届毕业生，具备扎实的编程基础和软件开发经验。在校期间参与多个项目开发，
+                熟悉Python等编程语言和Web开发技能，熟悉Web前段开发
+                具备良好的团队协作能力和问题解决能力。对人工智能和数据分析有浓厚兴趣。
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>教育背景</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">深圳职业技术大学</span>
+                    <span class="item-date">2023年9月 - 2026年6月</span>
+                    <span class="item-title">高中</span>
+                    <span class="item-data">2019年9月-2022年6月</span>
+                </div>
+                <div class="item-subtitle">通信软件技术</div>
+                <ul>
+                    <li>主修课程: Web前段开发技术、 Python、通信原理、Java、移动通信、5G全网建设、Linux操作系统</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>校园经历</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title"></span>
+                    <span class="item-date"></span>
+                </div>
+                <ul>
+                    <li>学习Java程序设计绩点不低于3</li>
+                    <li>设计并实现用户行为日志收集系统</li>
+                    <li>网络安全技术熟练掌握</li>
+                    <li>有数据通信技术实践经验</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title">实习生</span>
+                    <span class="item-date">2026年1月 - 2026年7月</span>
+                </div>
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <ul>
+            <li>开发了简单的Web界面</li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="section">
+        <h2>技能专长</h2>
+        <div class="skills">
+            <div class="skill-category">
+                <h3>编程语言</h3>
+                <ul>
+                    <li>Java </li>
+                    <li>Python </li>
+                    <li>JavaScript </li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>技术框架</h3>
+                <ul>
+                    <li>熟悉Python等编程语言和Web开发技能，熟悉Web前段开发</li>
+                    <li>MySQL/PostgreSQL - 数据库设计与优化</li>
+                </ul>
+            </div>
+        </div>
+        <div class="skills">
+            <div class="skill-category">
+                <h3>其他技能</h3>
+                <ul>
+                    <li>英语CET-4证书，能流畅阅读技术文档</li>
+                    <li>华为HCIA数据通信</li>
 
                 </ul>
             </div>
         </div>
-    </nav>
-
-    <!-- Top Section -->
-    <section class="top-section" style="background-image: url('static/assets/img/background.jpeg');">
-        <div class="top-section-content">
-            <div class="container px-5">
-                <h2 id="top-section-bg-text" class="text-white display-3 lh-1 font-alt"></h2>
-            </div>
-        </div>
-    </section>
-    <!-- Top Section -->
-
-    <!-- Photo -->
-    <div class="container px-5">
-        <div id="avatar">
-            <img class="shadow" src="static/assets/img/photo.png">
-        </div>
     </div>
-    <!-- Photo -->
-    
-    <!-- Home -->
-    <section class="bg-gradient-primary-to-secondary-light mt5 md5" id="home">
-        <div class="container px-5">
-            <header>
-                <h2 id="home-subtitle"> </h2>
-                <!-- <span class="bi bi-list"></span> -->
-            </header>
-            <div class="main-body" id="home-md"></div>
-        </div>
-    </section>
-    <!-- Home -->
-
-    <!-- Publications -->
-    <section class="bg-gradient-primary-to-secondary-gray mt5 md5" id="publications">
-        <div class="container px-5">
-            <header>
-                <h2 id="publications-subtitle"><i class="bi bi-file-text-fill"></i>&nbsp;PUBLICATIONS</h2>
-            </header>
-            <div class="main-body" id="publications-md"></div>
-
-        </div>
-    </section>
-    <!-- Publications  -->
-
-    <!-- Awards -->
-    <section class="bg-gradient-primary-to-secondary-light mt5 md5" id="awards">
-        <div class="container px-5">
-            <header>
-                <h2 id="awards-subtitle"><i class="bi bi-award-fill"></i>AWARDS </h2>
-            </header>
-            <div class="main-body" id="awards-md"></div>
-
-        </div>
-    </section>
-    <!-- Awards -->
-
-
-    <!-- Footer-->
-    <footer class="bg-bottom text-center py-5">
-        <div class="container px-5">
-            <div class="text-white-50 small">
-                <div id="copyright-text" class="mb-2"></div>
-                <a id="github-link" href="https://github.com/senli1073">Github</a>
-                <span class="mx-1">&middot;</span>
-                <a id="license-link" href="https://github.com/senli1073/senli1073.github.io/blob/main/LICENSE">License</a>
-            </div>
-        </div>
-    </footer>
-
+    </div>
 </body>
-
 </html>
