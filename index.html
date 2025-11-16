@@ -4,17 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简历</title>
+    <title>叶文锋 - 交互式简历</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-theme {
+            --primary-color: #4a9fe3;
+            --secondary-color: #ecf0f1;
+            --accent-color: #e74c3c;
+            --bg-color: #2c3e50;
+            --text-color: #ecf0f1;
+            --card-bg: rgba(44, 62, 80, 0.95);
+            --shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
         body {
             font-family: 'Microsoft YaHei', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
+            color: var(--text-color);
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            background-color: #f9f9f9;
+            background-color: var(--bg-color);
         }
 
         /* 背景图片样式 */
@@ -32,18 +57,22 @@
             z-index: -1;
         }
 
+        .dark-theme::before {
+            opacity: 0.05;
+        }
+
         .resume-container {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: var(--card-bg);
             padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
             position: relative;
         }
 
         .header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid var(--primary-color);
             padding-bottom: 20px;
             position: relative;
         }
@@ -55,10 +84,15 @@
             top: 0;
             width: 120px;
             height: 160px;
-            border: 3px solid #3498db;
+            border: 3px solid var(--primary-color);
             border-radius: 5px;
             overflow: hidden;
             background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
         }
 
         .photo img {
@@ -68,24 +102,67 @@
         }
 
         h1 {
-            color: #2c3e50;
+            color: var(--secondary-color);
             margin-bottom: 5px;
             padding-right: 130px;
-            /* 为照片留出空间 */
         }
 
         .contact-info {
             font-size: 16px;
             margin-bottom: 10px;
             padding-right: 130px;
-            /* 为照片留出空间 */
+        }
+
+        .contact-item {
+            cursor: pointer;
+            padding: 2px 5px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+
+        .contact-item:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-right: 5px;
         }
 
         h2 {
-            color: #3498db;
+            color: var(--primary-color);
             border-bottom: 1px solid #eee;
             padding-bottom: 5px;
             margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dark-theme h2 {
+            border-bottom-color: #34495e;
         }
 
         .section {
@@ -94,6 +171,13 @@
 
         .item {
             margin-bottom: 15px;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+            transition: border-left-color 0.3s;
+        }
+
+        .item:hover {
+            border-left-color: var(--primary-color);
         }
 
         .item-header {
@@ -113,7 +197,7 @@
 
         .item-subtitle {
             font-style: italic;
-            color: #3498db;
+            color: var(--primary-color);
             margin-bottom: 5px;
         }
 
@@ -136,12 +220,72 @@
             margin-right: 2%;
         }
 
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 5px 0 10px;
+            overflow: hidden;
+        }
+
+        .dark-theme .progress-bar {
+            background-color: #34495e;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        .expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expanded {
+            max-height: 500px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* 响应式设计 - 小屏幕调整 */
         @media (max-width: 600px) {
             .skill-category {
                 width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
             }
-
+            
             .resume-container {
                 padding: 15px;
             }
@@ -160,33 +304,43 @@
             .contact-info {
                 padding-right: 0;
             }
+            
+            .controls {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="notification" id="notification"></div>
+    
+    <div class="controls">
+        <button class="btn" id="printBtn"><i class="fas fa-print"></i> 打印简历</button>
+        <button class="btn" id="themeBtn"><i class="fas fa-moon"></i> 切换主题</button>
+    </div>
+    
     <div class="resume-container">
         <div class="header">
             <!-- 个人照片区域 -->
             <div class="photo">
-                <img src="./1.png.jpg" alt=" ">
+                <img src="" alt="个人照片">
             </div>
 
             <h1>叶文锋</h1>
             <div class="contact-info">
-                <span>电话: 19849524848</span> |
-                <span>邮箱: 1421223350@qq.com</span> |
-                <span>地址: 广东省深圳市</span>
+                <span class="contact-item" data-text="19849524848">电话: 19849524848</span> |
+                <span class="contact-item" data-text="1421223350@qq.com">邮箱: 1421223350@qq.com</span> |
+                <span class="contact-item" data-text="广东省深圳市">地址: 广东省深圳市</span>
             </div>
-
         </div>
 
         <div class="section">
             <h2>个人简介</h2>
             <p>
                 通信软件技术专业应届毕业生，具备扎实的编程基础和软件开发经验。在校期间参与多个项目开发，
-                熟悉Python等编程语言和Web开发技能，熟悉Web前段开发
-                具备良好的团队协作能力和问题解决能力。对人工智能和数据分析有浓厚兴趣。
+                熟悉Python、Java等编程语言和Web开发技能，具备良好的团队协作能力和问题解决能力。
+                对人工智能和数据分析有浓厚兴趣。
             </p>
         </div>
 
@@ -199,70 +353,176 @@
                 </div>
                 <div class="item-subtitle">通信软件技术</div>
                 <ul>
-                    <li>主修课程: Web前段开发技术、 Python、通信原理、Java、移动通信、5G全网建设、Linux操作系统</li>
+                    <li>主修课程: Web前端开发技术、Python、通信原理、Java、移动通信、5G全网建设、Linux操作系统</li>
+                    <li>学习Java程序设计绩点不低于3</li>
                 </ul>
             </div>
         </div>
 
         <div class="section">
-            <h2>校园经历</h2>
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title"></span>
-                    <span class="item-date"></span>
+            <h2>项目经历 <button class="toggle-btn" id="toggleProjects"><i class="fas fa-chevron-down"></i></button></h2>
+            <div class="expandable" id="projectsContent">
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">用户行为日志收集系统</span>
+                        <span class="item-date">2025年3月 - 2025年6月</span>
+                    </div>
+                    <ul>
+                        <li>设计并实现用户行为日志收集系统</li>
+                        <li>开发了简单的Web界面用于数据展示</li>
+                        <li>使用Python进行数据处理和分析</li>
+                        <li>实现了数据可视化功能</li>
+                    </ul>
                 </div>
-                <ul>
-                    <li>学习Java程序设计绩点不低于3</li>
-                    <li>设计并实现用户行为日志收集系统</li>
-                    <li>网络安全技术熟练掌握</li>
-                    <li>有数据通信技术实践经验</li>
-                </ul>
-            </div>
-            <div class="item">
-                <div class="item-header">
-                    <span class="item-title">实习生</span>
-                    <span class="item-date">2026年1月 - 2026年7月</span>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">校园网络管理系统</span>
+                        <span class="item-date">2024年9月 - 2024年12月</span>
+                    </div>
+                    <ul>
+                        <li>参与开发校园网络管理系统前端界面</li>
+                        <li>使用JavaScript实现交互功能</li>
+                        <li>优化了系统响应速度</li>
+                    </ul>
                 </div>
-                <ul>
-                </ul>
             </div>
         </div>
-        <ul>
-            <li>开发了简单的Web界面</li>
-        </ul>
-    </div>
+
+        <div class="section">
+            <h2>技能专长</h2>
+            <div class="skills">
+                <div class="skill-category">
+                    <h3>编程语言</h3>
+                    <div class="skill-item">
+                        <span>Java</span>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Python</span>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>JavaScript</span>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>技术框架与工具</h3>
+                    <div class="skill-item">
+                        <span>Web前端开发</span>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="70"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>MySQL/PostgreSQL</span>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="65"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Linux操作系统</span>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="skills">
+                <div class="skill-category">
+                    <h3>认证与语言</h3>
+                    <ul>
+                        <li>华为HCIA数据通信认证</li>
+                        <li>英语CET-4证书，能流畅阅读技术文档</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="section">
-        <h2>技能专长</h2>
-        <div class="skills">
-            <div class="skill-category">
-                <h3>编程语言</h3>
-                <ul>
-                    <li>Java </li>
-                    <li>Python </li>
-                    <li>JavaScript </li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>技术框架</h3>
-                <ul>
-                    <li>熟悉Python等编程语言和Web开发技能，熟悉Web前段开发</li>
-                    <li>MySQL/PostgreSQL - 数据库设计与优化</li>
-                </ul>
-            </div>
-        </div>
-        <div class="skills">
-            <div class="skill-category">
-                <h3>其他技能</h3>
-                <ul>
-                    <li>英语CET-4证书，能流畅阅读技术文档</li>
-                    <li>华为HCIA数据通信</li>
+    <script>
+        // 主题切换功能
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const icon = themeBtn.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.className = 'fas fa-sun';
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i> 切换主题';
+            } else {
+                icon.className = 'fas fa-moon';
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i> 切换主题';
+            }
+        });
 
-                </ul>
-            </div>
-        </div>
-    </div>
-    </div>
+        // 打印功能
+        const printBtn = document.getElementById('printBtn');
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+
+        // 项目经历展开/收起功能
+        const toggleProjects = document.getElementById('toggleProjects');
+        const projectsContent = document.getElementById('projectsContent');
+        toggleProjects.addEventListener('click', () => {
+            projectsContent.classList.toggle('expanded');
+            const icon = toggleProjects.querySelector('i');
+            if (projectsContent.classList.contains('expanded')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        });
+
+        // 联系方式复制功能
+        const contactItems = document.querySelectorAll('.contact-item');
+        const notification = document.getElementById('notification');
+        
+        contactItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const text = item.getAttribute('data-text');
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification(`已复制: ${text}`);
+                });
+            });
+        });
+
+        // 显示通知
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        // 技能进度条动画
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 200);
+            });
+        }
+
+        // 页面加载完成后执行
+        window.addEventListener('load', () => {
+            // 默认展开项目经历
+            projectsContent.classList.add('expanded');
+            const icon = toggleProjects.querySelector('i');
+            icon.className = 'fas fa-chevron-up';
+            
+            // 初始化进度条动画
+            animateProgressBars();
+        });
+    </script>
 </body>
 </html>
